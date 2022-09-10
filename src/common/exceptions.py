@@ -1,0 +1,2 @@
+class InvalidValidationCodeError(BaseException):
+    pass

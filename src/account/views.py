@@ -8,6 +8,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from src.account.serializers import PhoneValidationVerifyCodeRequestSerializer
 from src.common.constants import HttpStatusCodes
+from src.common.exceptions import InvalidValidationCodeError
+from src.validation.services import PhoneValidationService
 
 
 class PhoneValidationVerifyCodeView(APIView):
@@ -27,4 +29,17 @@ class PhoneValidationVerifyCodeView(APIView):
         if not serializer.is_valid():
             return Response(status=HttpStatusCodes.C_400_BAD_REQUEST)
 
-        return Response(status=HttpStatusCodes.C_200_OK)
+        try:
+            PhoneValidationService.verify_code(
+                serializer.validated_data["phone"], serializer.validated_data["code"]
+            )
+
+        except InvalidValidationCodeError:
+            return Response(
+                status=HttpStatusCodes.C_400_BAD_REQUEST,
+                data={"msg": "InvalidValidationTokenError"},
+            )
+
+        return Response(
+            status=HttpStatusCodes.C_200_OK, data={"msg": "전환 본인 인증이 성공하였습니다."}
+        )

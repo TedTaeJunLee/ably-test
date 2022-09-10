@@ -9,6 +9,7 @@ from src.validation.serializers import (
     PhoneValidationSendCodeRequestSerializer,
     PhoneValidationSendCodeResponseSerializer,
 )
+from src.validation.services import PhoneValidationService
 
 
 class PhoneValidationSendCodeView(APIView):
@@ -32,8 +33,9 @@ class PhoneValidationSendCodeView(APIView):
                 status=HttpStatusCodes.C_400_BAD_REQUEST,
                 data=serializer.errors,
             )
+        code = PhoneValidationService.send_code(serializer.validated_data["phone"])
 
         return Response(
             status=HttpStatusCodes.C_200_OK,
-            data=PhoneValidationSendCodeResponseSerializer({"code": "111111"}).data,
+            data=PhoneValidationSendCodeResponseSerializer({"code": code}).data,
         )

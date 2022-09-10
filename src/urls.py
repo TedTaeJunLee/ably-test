@@ -62,6 +62,3 @@ if settings.DEBUG:
         + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
         + urlpatterns
     )
-tterns = (
-    urls + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + urlpatterns
-)
