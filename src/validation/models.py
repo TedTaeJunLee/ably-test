@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 from src.common.mixins import SoftDeleteMixin
 from src.common.models import BaseModel
+from src.validation.constants import PHONE_VALIDATION_USAGE_TYPE_CHOICES
 
 
 class PhoneValidationCode(SoftDeleteMixin, BaseModel):
@@ -12,6 +13,11 @@ class PhoneValidationCode(SoftDeleteMixin, BaseModel):
     expire_at = models.DateTimeField(verbose_name="인증번호 만료일")
     is_used = models.BooleanField(default=False, verbose_name="사용 여부")
     use_at = models.DateTimeField(null=True, blank=True, verbose_name="인증번호 사용일")
+    usage_type = models.CharField(
+        choices=PHONE_VALIDATION_USAGE_TYPE_CHOICES,
+        max_length=16,
+        verbose_name="사용 용도 유형",
+    )
 
     class Meta:
         db_table = "phone_validation_code"

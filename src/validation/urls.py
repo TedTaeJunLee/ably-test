@@ -1,7 +1,9 @@
 from django.urls import path
-from src.account.views import PhoneValidationVerifyCodeView
 from src.validation.apps import ValidationConfig
-from src.validation.views import PhoneValidationSendCodeView
+from src.validation.views import (
+    PhoneValidationSendCodeView,
+    PhoneValidationVerifyCodeView,
+)
 
 app_name = ValidationConfig.name
 
