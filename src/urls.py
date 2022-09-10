@@ -17,19 +17,32 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_swagger.views import get_swagger_view
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
+
 if settings.DEBUG:
     import debug_toolbar
 
-    schema_view = get_swagger_view(title='Pastebin API')
-
+    schema_view = get_schema_view(
+        openapi.Info(
+            title="Ably-Test API",
+            default_version='v1',
+            description="Test description",
+            terms_of_service="https://www.google.com/policies/terms/",
+            contact=openapi.Contact(email="tejunlee007@ably-test.local"),
+        ),
+        public=True,
+        permission_classes=[permissions.AllowAny],
+    )
     urls = [
-        path("api/docs/swagger/", schema_view, name="schemas-swagger-ui"),
+        path("api/swagger/", schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+        path("api/redoc/", schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
         path("api/__debug__/", include(debug_toolbar.urls)),
     ]
     urlpatterns = urls + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + urlpatterns

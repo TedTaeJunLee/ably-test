@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-xhb*jt7=cv69ohfd^yki1nlrty_7bp5_x8azllo7aua85%=8+p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["w.ably-test.local"]
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 SESSION_COOKIE_DOMAIN = "ably-test.local"
 
@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework_swagger',
-    'debug_toolbar'
+    'drf_yasg',
+    'debug_toolbar',
+    # Apps
+    'account'
 ]
 
 MIDDLEWARE = [
