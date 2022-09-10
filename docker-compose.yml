@@ -11,7 +11,7 @@ services:
       - ./.tmp/mysql:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ably-test-backend
+      MYSQL_DATABASE: ably-test
       MYSQL_USER: admin
       MYSQL_PASSWORD: test
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --lower_case_table_names=1
