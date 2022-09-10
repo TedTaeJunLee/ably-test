@@ -127,3 +127,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# For Mac OS
+.idea/
+
+infra/local/cert/*
