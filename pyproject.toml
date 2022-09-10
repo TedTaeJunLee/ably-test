@@ -11,6 +11,12 @@ django-debug-toolbar = "^3.6.0"
 django-cors-headers = "^3.13.0"
 djangorestframework = "^3.13.1"
 drf-yasg = "^1.21.3"
+Markdown = "^3.4.1"
+django-filter = "^22.1"
+black = "^22.8.0"
+isort = "^5.10.1"
+django-phonenumber-field = "^7.0.0"
+phonenumbers = "^8.12.55"
 
 [tool.poetry.dev-dependencies]
 
