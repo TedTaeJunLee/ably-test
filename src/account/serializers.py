@@ -37,3 +37,7 @@ class SignInRequestSerializer(BaseSerializer):
 class SignInResponseSerializer(BaseSerializer):
     user = MinimalUserModelSerializer()
     token = serializers.CharField(label="토큰")
+
+
+class UsersMeResponseSerializer(BaseSerializer):
+    user = MinimalUserModelSerializer()

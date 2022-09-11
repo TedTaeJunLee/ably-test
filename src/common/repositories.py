@@ -18,3 +18,7 @@ class BaseRepository(ABC):
             entity.save(force_insert=True)
 
         return entities
+
+    @classmethod
+    def get_by_id(cls, model_id: int) -> Any:
+        return cls.get_queryset().get(id=model_id)

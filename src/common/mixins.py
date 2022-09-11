@@ -1,3 +1,4 @@
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.db import models
 from django.utils import timezone
 
@@ -10,5 +11,10 @@ class SoftDeleteMixin(models.Model):
         self.is_deleted = True
         self.deleted_at = timezone.now()
 
+    class Meta:
+        abstract = True
+
+
+class BaseAbstractBaseUser(AbstractBaseUser):
     class Meta:
         abstract = True
