@@ -3,8 +3,7 @@ from typing import Dict
 
 import jwt
 from django.core.exceptions import ObjectDoesNotExist
-from jwt import InvalidKeyError, InvalidTokenError
-from src.common.utils import generate_random_str
+from jwt.exceptions import InvalidKeyError, InvalidTokenError
 from src.validation.constants import JWT_ALGORITHM_RSA
 from src.validation.exceptions import JwtVerifyError
 from src.validation.repositories.token_validation_repository import (
@@ -28,7 +27,7 @@ class JwtService:
             self._create_payload(payload),
             key.private_key,
             JWT_ALGORITHM_RSA,
-            {"kid": generate_random_str(5, True, True, True, False)},
+            {"kid": key.kid},
         )
 
     def verify(self, encoded_jwt: str) -> Dict:
@@ -37,6 +36,6 @@ class JwtService:
             key = KeyValidationRepository.get_active_by_key_type_and_kid(
                 self._key_type, kid
             )
-            return jwt.decode(encoded_jwt, key.private_key, JWT_ALGORITHM_RSA)
+            return jwt.decode(encoded_jwt, key.public_key, JWT_ALGORITHM_RSA)
         except (InvalidTokenError, InvalidKeyError, ObjectDoesNotExist) as e:
             raise JwtVerifyError from e

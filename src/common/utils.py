@@ -28,3 +28,23 @@ def generate_random_str(
     if punctuation:
         letters += string_lib.punctuation
     return "".join(random.choices(_filter_generatable_char(letters), k=n))
+
+
+def mask_string(string_to_mask: str, length_to_show: int = 3) -> str:
+    if not string_to_mask:
+        return ""
+
+    if len(string_to_mask) <= length_to_show:
+        return string_to_mask
+
+    return string_to_mask[:length_to_show] + "*" * (
+        len(string_to_mask) - length_to_show
+    )
+
+
+def mask_email(email_to_mask: str, length_to_show: int = 3) -> str:
+    if not email_to_mask:
+        return ""
+
+    email_name, email_domain = email_to_mask.split("@")
+    return f"{email_name[:length_to_show]}{'*' * (len(email_name) - length_to_show)}@{email_domain}"

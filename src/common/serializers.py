@@ -7,3 +7,7 @@ class BaseSerializer(serializers.Serializer):
 
     def create(self, validated_data):
         pass
+
+
+class BaseModelSerializer(serializers.ModelSerializer):
+    pass

@@ -22,7 +22,6 @@ class TokenValidationService:
     def verify_token(cls, key_type: str, token: str, payload: str):
         try:
             token_payload = JwtService(key_type).verify(token)
-
         except JwtVerifyError as e:
             raise InvalidTokenError from e
 
