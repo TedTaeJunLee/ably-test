@@ -84,7 +84,8 @@ class PhoneValidationVerifyCodeView(APIView):
                 )
 
             token = TokenValidationService.generate_token(
-                SIGN_UP_PHONE_VALIDATION, str(serializer.validated_data["phone"])
+                serializer.validated_data["token_validation_type"],
+                str(serializer.validated_data["phone"]),
             )
 
         return Response(

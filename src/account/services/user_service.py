@@ -43,3 +43,10 @@ class UserService:
             return UserRepository.get_by_id(user_id)
         except ObjectDoesNotExist:
             raise UserDoesNotExistError
+
+    @classmethod
+    def get_user_by_phone(cls, phone: str) -> User:
+        try:
+            return UserRepository.get_by_email_and_phone(phone=phone)
+        except ObjectDoesNotExist:
+            raise UserDoesNotExistError

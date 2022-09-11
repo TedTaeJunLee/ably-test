@@ -41,3 +41,13 @@ class SignInResponseSerializer(BaseSerializer):
 
 class UsersMeResponseSerializer(BaseSerializer):
     user = MinimalUserModelSerializer()
+
+
+class PasswordResetRequestSerializer(BaseSerializer):
+    token = serializers.CharField(label="핸드폰 인증 토큰")
+    phone = PhoneNumberField(label="핸드폰 번호", region="KR")
+    password = serializers.CharField(label="비밀번호")
+
+
+class PasswordResetResponseSerializer(BaseSerializer):
+    pass

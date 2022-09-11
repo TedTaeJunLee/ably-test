@@ -1,15 +1,4 @@
-from datetime import timedelta
-
-from django.core.exceptions import ObjectDoesNotExist
-from django.db import IntegrityError
-from django.utils import timezone
-from jwt import InvalidTokenError
-from src.common.utils import generate_random_str
-from src.validation.exceptions import JwtVerifyError
-from src.validation.models import KeyValidation
-from src.validation.repositories.token_validation_repository import (
-    KeyValidationRepository,
-)
+from src.validation.exceptions import InvalidTokenError, JwtVerifyError
 from src.validation.services.jwt_service import JwtService
 
 

@@ -2,7 +2,6 @@ from django.db import models
 
 # Create your models here.
 from phonenumber_field.modelfields import PhoneNumberField
-from src.account.services.password_service import PasswordService
 from src.common.mixins import BaseAbstractBaseUser
 from src.common.models import BaseModel
 from src.common.utils import mask_email, mask_string
@@ -28,7 +27,3 @@ class User(BaseAbstractBaseUser, BaseModel):
     @property
     def masked_email(self):
         return mask_email(self.email)
-
-    def save(self, *args, force_insert=False, force_update=False, **kwargs):
-        self.password = PasswordService.make_hashed_password(self.password)
-        super().save(force_insert, force_update, *args, **kwargs)

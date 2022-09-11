@@ -22,3 +22,10 @@ class BaseRepository(ABC):
     @classmethod
     def get_by_id(cls, model_id: int) -> Any:
         return cls.get_queryset().get(id=model_id)
+
+    @classmethod
+    def save(cls, entities: List, update_fields: List) -> List:
+        for entity in entities:
+            entity.save(update_fields=update_fields)
+
+        return entities

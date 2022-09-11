@@ -1,5 +1,6 @@
 from src.account.models import User
 from src.account.repositories import UserRepository
+from src.account.services.password_service import PasswordService
 
 
 class AccountSignUpService:
@@ -12,7 +13,7 @@ class AccountSignUpService:
                 User(
                     email=email,
                     nickname=nickname,
-                    password=password,
+                    password=PasswordService.make_hashed_password(password),
                     name=name,
                     phone=phone,
                 )

@@ -7,8 +7,13 @@ class UserRepository(BaseRepository):
     model_class = User
 
     @classmethod
-    def get_by_email_and_phone(cls, email: str, phone: str) -> User:
-        return cls.get_queryset().get(email=email, phone=phone)
+    def get_by_email_and_phone(cls, email: str = None, phone: str = None) -> User:
+        queryset = cls.get_queryset()
+        if email:
+            queryset = queryset.get(email=email)
+        if phone:
+            queryset = queryset.get(phone=phone)
+        return queryset
 
     @classmethod
     def get_by_login_input(cls, login_input: str) -> User:

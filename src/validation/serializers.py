@@ -24,6 +24,9 @@ class PhoneValidationVerifyCodeRequestSerializer(BaseSerializer):
     usage_type = serializers.ChoiceField(
         choices=PHONE_VALIDATION_USAGE_TYPE_CHOICES, label="사용 용도 유형"
     )
+    token_validation_type = serializers.ChoiceField(
+        choices=TOKEN_VALIDATION_KEY_TYPE_CHOICES, label="토큰 검증 유형"
+    )
 
 
 class PhoneValidationVerifyCodeResponseSerializer(BaseSerializer):

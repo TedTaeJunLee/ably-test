@@ -4,7 +4,7 @@ RUN apt-get update \
  && apt-get install -y default-libmysqlclient-dev gcc g++ make default-mysql-client mime-support \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-ADD .. /htdocs/www/
+ADD ../../../ /htdocs/www/
 
 WORKDIR /htdocs/www/
 RUN pip install poetry \

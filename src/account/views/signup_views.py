@@ -42,7 +42,7 @@ class SignUpView(APIView):
             TokenValidationService.verify_token(
                 SIGN_UP_PHONE_VALIDATION,
                 serializer.validated_data["token"],
-                serializer.validated_data["phone"],
+                str(serializer.validated_data["phone"]),
             )
             with transaction.atomic():
                 user = AccountSignUpService.sign_up(
