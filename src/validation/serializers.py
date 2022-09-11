@@ -1,7 +1,10 @@
 from phonenumber_field.serializerfields import PhoneNumberField
 from rest_framework import serializers
 from src.common.serializers import BaseSerializer
-from src.validation.constants import PHONE_VALIDATION_USAGE_TYPE_CHOICES
+from src.validation.constants import (
+    PHONE_VALIDATION_USAGE_TYPE_CHOICES,
+    TOKEN_VALIDATION_KEY_TYPE_CHOICES,
+)
 
 
 class PhoneValidationSendCodeRequestSerializer(BaseSerializer):
@@ -21,3 +24,7 @@ class PhoneValidationVerifyCodeRequestSerializer(BaseSerializer):
     usage_type = serializers.ChoiceField(
         choices=PHONE_VALIDATION_USAGE_TYPE_CHOICES, label="사용 용도 유형"
     )
+
+
+class PhoneValidationVerifyCodeResponseSerializer(BaseSerializer):
+    token = serializers.CharField(label="인증 확인 토큰")

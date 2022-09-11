@@ -17,6 +17,8 @@ black = "^22.8.0"
 isort = "^5.10.1"
 django-phonenumber-field = "^7.0.0"
 phonenumbers = "^8.12.55"
+PyJWT = "^2.4.0"
+cryptography = "^38.0.1"
 
 [tool.poetry.dev-dependencies]
 

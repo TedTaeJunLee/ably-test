@@ -7,7 +7,9 @@ from src.common.exceptions import InvalidValidationCodeError
 from src.common.utils import generate_random_str
 from src.validation.constants import PHONE_VALIDATION_CODE_EXPIRE_MIN
 from src.validation.models import PhoneValidationCode
-from src.validation.repositories import PhoneValidationCodeRepository
+from src.validation.repositories.phone_validation_code_repository import (
+    PhoneValidationCodeRepository,
+)
 
 
 class PhoneValidationService:
@@ -15,7 +17,9 @@ class PhoneValidationService:
     def send_code(cls, phone: str, usage_type: str) -> str:
         phone_validation_code = None
 
-        PhoneValidationCodeRepository.soft_delete_unused_by_phone_and_usage_type(phone)
+        PhoneValidationCodeRepository.soft_delete_unused_by_phone_and_usage_type(
+            phone, usage_type
+        )
 
         while True:
             try:
