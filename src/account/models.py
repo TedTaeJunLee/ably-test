@@ -2,14 +2,14 @@ from django.db import models
 
 # Create your models here.
 from phonenumber_field.modelfields import PhoneNumberField
-from src.account.password_service import PasswordService
+from src.account.services.password_service import PasswordService
 from src.common.models import BaseModel
 from src.common.utils import mask_email, mask_string
 
 
 class User(BaseModel):
     email = models.EmailField(unique=True, verbose_name="이메일")
-    nickname = models.CharField(max_length=64, verbose_name="닉네임")
+    nickname = models.CharField(unique=True, max_length=64, verbose_name="닉네임")
     password = models.CharField(max_length=128, verbose_name="비밀번호")
     name = models.CharField(max_length=32, verbose_name="사용자 이름")
     phone = PhoneNumberField(unique=True, verbose_name="핸드폰 번호", region="KR")

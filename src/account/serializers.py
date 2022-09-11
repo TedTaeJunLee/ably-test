@@ -27,3 +27,13 @@ class SignUpRequestSerializer(BaseSerializer):
 class SignUpResponseSerializer(BaseSerializer):
     user = MinimalUserModelSerializer()
     token = serializers.CharField(label="토큰")
+
+
+class SignInRequestSerializer(BaseSerializer):
+    login_input = serializers.CharField(label="로그인시 사용할 값 예) 이메일 or 폰번호 or 닉네임")
+    password = serializers.CharField(label="로그인 비밀번호")
+
+
+class SignInResponseSerializer(BaseSerializer):
+    user = MinimalUserModelSerializer()
+    token = serializers.CharField(label="토큰")

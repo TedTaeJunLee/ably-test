@@ -16,3 +16,7 @@ class UserService:
             raise AlreadyExistUserError
         except ObjectDoesNotExist:
             pass
+
+    @classmethod
+    def get_by_login_input(cls, login_input: str) -> User:
+        return UserRepository.get_by_login_input(login_input)
