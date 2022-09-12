@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 def main():
     """Run administrative tasks."""
     arguments = sys.argv[:]
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.local")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", f"src.settings.{os.getenv('ENVIRONMENT', default='base')}")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

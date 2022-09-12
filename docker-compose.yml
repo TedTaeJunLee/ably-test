@@ -3,7 +3,8 @@ version: '3.4'
 services:
   ably-test-mysql:
     image: mysql:5.7
-    container_name: ably-test-backend-mysql
+    container_name: ably-test-mysql
+    platform: linux/amd64
     restart: always
     ports:
       - 3306:3306
@@ -18,9 +19,12 @@ services:
 
   ably-test-backend:
     image: ably-test-backend
+    env_file:
+      - infra/local/.env
     build:
       context: .
       dockerfile: infra/local/docker/Dockerfile
+    platform: linux/amd64
     container_name: ably-test-backend-backend
     restart: always
     environment:
@@ -31,12 +35,14 @@ services:
       - ably-test-mysql
     links:
       - ably-test-mysql
+    ports:
+      - "8000:8000"
     command:
       - bash
       - -c
       - |
         ./infra/wait_for_it.sh ably-test-mysql:3306
-        make run-ably-test-backend
+        make run-docker-ably-test-backend
 
   ably-test-nginx:
     image: nginx:stable
@@ -44,7 +50,7 @@ services:
     restart: always
     hostname: 'w.ably-test.local'
     volumes:
-      - ./infra/local/nginx/ably-test.conf:/etc/nginx/conf.d/ably-test.conf:ro
+      - ./infra/local/nginx/ably_test.conf:/etc/nginx/conf.d/ably_test.conf:ro
       - ./infra/local/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./infra/local/cert:/etc/nginx/cert/:ro
     ports:

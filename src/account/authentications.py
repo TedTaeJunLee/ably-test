@@ -20,7 +20,8 @@ class UserAuthentication(BaseAuthentication):
                 UserService.get_user_by_token(token),
                 None,
             )
-
+        except IndexError:
+            return None
         except ObjectDoesNotExist:
             return None
 
