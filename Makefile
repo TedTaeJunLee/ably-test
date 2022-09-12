@@ -14,7 +14,9 @@ poetry-install-ably-test-backend:
 run-docker-ably-test-backend:
 	@uwsgi --ini infra/local/wsgi/ably_test.ini
 
+migrate-db:
+	@cd src && poetry run ./manage.py migrate
 
-run-local-ably-test-backend:
+run-local-ably-test-backend: migrate-db
 	@export ENVIRONMENT='local'
 	@cd src && poetry run ./manage.py runserver 0.0.0.0:8000
