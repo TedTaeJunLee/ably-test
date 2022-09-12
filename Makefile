@@ -20,3 +20,9 @@ migrate-db:
 run-local-ably-test-backend: migrate-db
 	@export ENVIRONMENT='local'
 	@cd src && poetry run ./manage.py runserver 0.0.0.0:8000
+
+run-docker-compose-build:
+	@docker-compose up --build
+
+run-docker-compose:
+	@docker-compose up

@@ -10,4 +10,4 @@ WORKDIR /htdocs/www/
 RUN pip install poetry \
  && poetry config virtualenvs.create false \
  && poetry install \
- && echo yes | python manage.py collectstatic
+ && echo yes | python src/manage.py collectstatic
