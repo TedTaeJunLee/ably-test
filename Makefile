@@ -16,4 +16,5 @@ run-docker-ably-test-backend:
 
 
 run-local-ably-test-backend:
-	@cd src && export ENVIRONMENT='local' && poetry run ./manage.py runserver 0.0.0.0:8000
+	@export ENVIRONMENT='local'
+	@cd src && poetry run ./manage.py runserver 0.0.0.0:8000

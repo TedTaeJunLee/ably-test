@@ -24,7 +24,7 @@ SECRET_KEY = "django-insecure-xhb*jt7=cv69ohfd^yki1nlrty_7bp5_x8azllo7aua85%=8+p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0"]
 
 SESSION_COOKIE_DOMAIN = "ably-test.local"
 

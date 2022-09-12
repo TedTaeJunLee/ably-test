@@ -39,8 +39,25 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 ```
 - [Pycharm plugin](https://koxudaxi.github.io/poetry-pycharm-plugin/)
 
+### 앱 실행 방법
+- 로컬에서 장고앱 실행시
+   ```
+      cd 'root 폴더'
+      make run-local-ably-test-backend 
+   ```
+- docker-compose로 실행시
+   ```
+      시간이 부족하여 완료 못하였습니다.
+   ```
+  
+### API Swagger 문서 접근 주소
+   ```
+      http://0.0.0.0:8000/api/swagger/
+      http://127.0.0.1:8000/api/swagger/
+   ```
 
-### 개발 API 명세  
+
+### 개발 API 명세 및 테스트 시 참고 사항 
 1. 회원 가입 위한 전화 번호 인증 (/validations/phone-validation/send-code/ & /validations/phone-validation/verify-code/)
    - 회원 가입을 위한 전화 번호 인증 API 에서 usage_type = 'SING_UP' 입니다
    - 전환번호로 실제 메세지 전송 대신 API 응답으로 랜덤 코드 반환하기
@@ -53,12 +70,14 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
    - 인증 완료 token의 유효 기간이 지난 상태라면 회원가입이 실패하도록 처리
    - 고려 사항:
      - 이미 사용중인 이메일 혹은 닉네임 혹은 phone이라면 회원가입을 거부하도록 하였습니다.
-3. 로그인 기능
+3. 로그인 기능(/accounts/sign-in/)
    - (아매일 / 닉네임 / 전화번호) + 비밀번호 조합으로 로그인 시 로그인 되도록 구현하였습니다
-4. 내 정보 조회 기능
-   - 발급받은 token(jwt) 을 사용하여 정보를 조회 할 수 있습니다.
+4. 내 정보 조회 기능(/accounts/users/me/)
+   - 로그인 / 회원가입 이후 발급받은 token(jwt)을 사용하여 정보를 조회 할 수 있습니다.
    - 기본적으로 이메일 & 전화번호는 보안을 위해서 API 응답시 masking 처리 하였습니다.
-1. 비밀번호 재설정을 위한 전화 번호 인증 (/validations/phone-validation/send-code/ & /validations/phone-validation/verify-code/)
+5. 비밀번호 재설정을 위한 전화 번호 인증 (/validations/phone-validation/send-code/ & /validations/phone-validation/verify-code/)
     - 비밀번호 재설정을 위한 전화 번호 인증 API 에서 usage_type = 'PASSWORD_RESET' 입니다
     - 성공시 200 status_code 가 응답됩니다.
-
+. 비밀번호 재설정(/accounts/password-reset/)
+   - 비밀번호 재설정을 위한 전화 번호 인증 API 에서 발급받은 token을 사용하여 비밀번호를 재설정 합니다 
+   - 성공시 200 status_code 가 응답됩니다.
