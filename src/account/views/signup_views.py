@@ -3,7 +3,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db import DatabaseError, transaction
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from jwt import InvalidTokenError
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -13,6 +12,7 @@ from src.account.services.sign_up_service import AccountSignUpService
 from src.account.services.user_service import UserService
 from src.common.constants import HttpStatusCodes
 from src.validation.constants import SIGN_UP_PHONE_VALIDATION, USERS_ME_AUTHORIZATION
+from src.validation.exceptions import InvalidTokenError
 from src.validation.services.token_service import TokenService
 from src.validation.services.token_validation_service import TokenValidationService
 
@@ -61,12 +61,12 @@ class SignUpView(APIView):
         except InvalidTokenError as e:
             return Response(
                 status=HttpStatusCodes.C_400_BAD_REQUEST,
-                data={"msg": str(e.args)},
+                data={"msg": "InvalidTokenError"},
             )
         except DatabaseError as e:
             return Response(
                 status=HttpStatusCodes.C_404_NOT_FOUND,
-                data={"msg": str(e.args)},
+                data={"msg": "DatabaseError"},
             )
         return Response(
             status=HttpStatusCodes.C_200_OK,
