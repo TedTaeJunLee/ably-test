@@ -8,12 +8,12 @@ class UserRepository(BaseRepository):
 
     @classmethod
     def get_by_email_and_phone(cls, email: str = None, phone: str = None) -> User:
-        queryset = cls.get_queryset()
+        queryset = cls.get_queryset().filter(is_deleted=False)
         if email:
-            queryset = queryset.get(email=email)
+            queryset = queryset.filter(email=email)
         if phone:
-            queryset = queryset.get(phone=phone)
-        return queryset
+            queryset = queryset.filter(phone=phone)
+        return queryset.last()
 
     @classmethod
     def get_by_login_input(cls, login_input: str) -> User:

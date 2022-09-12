@@ -17,7 +17,9 @@ class UserService:
     @classmethod
     def check_if_user_exists(cls, email: str, phone: str) -> None:
         try:
-            cls.get_user_by_email_and_phone(email, phone)
+            user = cls.get_user_by_email_and_phone(email, phone)
+            if not user:
+                raise ObjectDoesNotExist
             raise AlreadyExistUserError
         except ObjectDoesNotExist:
             pass

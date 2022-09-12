@@ -2,12 +2,12 @@ from django.db import models
 
 # Create your models here.
 from phonenumber_field.modelfields import PhoneNumberField
-from src.common.mixins import BaseAbstractBaseUser
+from src.common.mixins import BaseAbstractBaseUser, SoftDeleteMixin
 from src.common.models import BaseModel
 from src.common.utils import mask_email, mask_string
 
 
-class User(BaseAbstractBaseUser, BaseModel):
+class User(SoftDeleteMixin, BaseAbstractBaseUser, BaseModel):
     email = models.EmailField(unique=True, verbose_name="이메일")
     nickname = models.CharField(unique=True, max_length=64, verbose_name="닉네임")
     password = models.CharField(max_length=128, verbose_name="비밀번호")

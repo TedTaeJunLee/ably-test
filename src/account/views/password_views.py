@@ -43,12 +43,14 @@ class PasswordResetView(APIView):
             )
 
         except InvalidTokenError as e:
-            return Response(
-                HttpStatusCodes.C_400_BAD_REQUEST, data={"msg": str(e.args)}
-            )
+                return Response(
+                    status=HttpStatusCodes.C_400_BAD_REQUEST,
+                    data={"mgs": f"InvalidTokenError"},
+                )
         except DatabaseError as de:
             return Response(
-                HttpStatusCodes.C_406_NOT_ACCEPTABLE, data={"msg": str(de.args)}
+                status=HttpStatusCodes.C_400_BAD_REQUEST,
+                data={"mgs": str(de.args)},
             )
 
         return Response(status=HttpStatusCodes.C_200_OK)

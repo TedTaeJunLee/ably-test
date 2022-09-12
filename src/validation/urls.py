@@ -14,7 +14,7 @@ urlpatterns = [
         name="phone-validation-send-code",
     ),
     path(
-        "phone-valiation/verify-code/",
+        "phone-validation/verify-code/",
         PhoneValidationVerifyCodeView.as_view(),
         name="phone-validation-verify-code",
     ),
